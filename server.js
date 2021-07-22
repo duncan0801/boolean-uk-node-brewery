@@ -12,7 +12,8 @@ app.get("/breweries", (req, res) => {
 
     if(reqQueryKeys.includes("brewery_type")) {
         const filteredBreweries = breweries.filter(brewery => brewery["brewery_type"] === reqQueryObj["brewery_type"])
-        res.json(filteredBreweries);
+        const response = filteredBreweries.length ? filteredBreweries : `No breweries of type ${reqQueryObj["brewery_type"]}`
+        res.json({breweries: response});
     } else {
         res.json(breweries);
     }
